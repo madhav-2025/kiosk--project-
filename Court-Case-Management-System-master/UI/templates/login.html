@@ -1,0 +1,56 @@
+{{ define "login.layout" }}
+
+{{ template "navbar" . }}
+{{ template "login.content" . }}
+{{ template "footer" . }}
+
+{{ end }}
+
+{{ define "login.content" }}
+<style>
+    .form-signin {
+        width: 100%;
+        max-width: 400px;
+        padding: 15px;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+    }
+</style>
+<body background="../assets/img/all_bg.jpg">
+<div class="container">
+    <form class="form-signin" method="POST" action="/login">
+        <h3 class="h3 mb-3 font-weight-normal">LOGIN</h3>
+        <input type="hidden" name="_csrf" value="{{ .CSRF }}" />
+        {{with .VErrors.Get "generic" }}
+        <label class="text-danger">{{ . }}</label>
+        {{end}}
+        <div class="col-auto">
+            <label for="user_id" class="col-form-label">User ID</label>
+            <input type="text" id="user_id" name="user_id" class="form-control" placeholder="User ID" required autofocus>
+        </div>
+        <div class="col-auto">
+            <label for="password" class="col-form-label">Password</label>
+            <input type="password" id="password" name="user_pwd" class="form-control" placeholder="Password" required>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block form-control" type="submit">LOGIN</button>
+        <button class="btn btn-lg btn-warning btn-block form-control" type="reset">Reset</button>
+    </form>
+
+    <br>
+    <h3 class="h3 mb-3 font-weight-normal">Search Case</h3>
+    <form class="form-signin" id="view_case_form" method="GET" action="/search/case">
+        <label for="case_num" class="col-form-label">User ID</label>
+        <input type="text" id="case_num" name="case_num" class="form-control" placeholder="Case Number" required autofocus>
+        <button class="btn btn-lg btn-dark btn-block form-control" type="submit" id="view_case_btn">Search Case</button>
+    </form>
+</div>
+
+</body>
+{{ end }}

@@ -1,0 +1,42 @@
+{{ define "admin.cases.layout" }} 
+
+{{ template "navbar" . }} 
+{{ template "admin.cases.content" . }} 
+{{ template "footer" . }} 
+
+{{ end }} 
+
+{{ define "admin.cases.content" }}
+<body background="../assets/img/all_bg.jpg">
+<div class="container">
+
+    <h1> Admin View Cases </h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Case Title</th>
+                <th scope="col">Case Description</th>
+                <th scope="col">Update Case</th>
+                <th scope="col">Add Opponent</th>
+                <th scope="col">Delete Case</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .}}
+            <tr>
+                <th scope="row"> {{ .ID }} </th>
+                <td> {{ .CaseTitle }} </td>
+                <td> {{ .CaseDesc }} </td>
+                <td> <a href="/admin/cases/update?id={{ .ID }}">Update Case</a> </td>
+                <td> <a href="/admin/opponent/new?case_num={{ .CaseNum }}&opp_type=pl">Add Plaintiff</a> </td>
+                <td> <a href="/admin/opponent/new?case_num={{ .CaseNum }}&opp_type=ac">Add Accused</a> </td>
+                <td> <a href="/admin/cases/delete?id={{ .ID }}">Delete</a> </td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+
+</div>
+</body>
+{{ end }}

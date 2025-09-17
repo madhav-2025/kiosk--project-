@@ -1,0 +1,63 @@
+{{ define "judge.case.close.layout" }} 
+
+{{ template "allheader.navbar" . }} 
+{{ template "judge.case.close.content" . }} 
+{{ template "footer" . }} 
+
+{{ end }} 
+
+{{ define "judge.case.close.content" }}
+<style>
+    .form-newcase {
+        width: 100%;
+        max-width: 500px;
+        padding: 15px;
+    }
+
+    .form-newcase .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+    }
+</style>
+<body background="../assets/img/all_bg.jpg">
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2>Create New Case</h2>
+    </div>
+
+    <form form class="form-newcase" action="/judge/cases/close" method="POST">
+        <div class="col-auto">
+            <label for='case_num' class='col-form-label'>Choose Case to Close</label>
+            <select class="form-control" id='case_num' name="case_num" required autofocus>
+                <optgroup label="Cases">
+                    {{range .}}
+                        <option value="{{ .CaseNum }}"> {{ .CaseNum }} </option>
+                    {{end}}
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="col-auto">
+            <label for='case_num' class='col-form-label'>Final Decision</label>
+            <input type="text" class="form-control" id='case_num' name="final_decision" required autofocus placeholder="Case Final Decision" />
+        </div>
+
+        <div class="col-auto">
+            <label for='close_desc' class='col-form-label'>Case Close Description</label>
+            <textarea class="form-control" id='close_desc' name="close_desc" required placeholder="Case Close Description" rows="5"></textarea>
+        </div>
+
+        <div class="col-auto">
+             <button type="submit" class='btn btn-primary form-control'> Close Case </button>
+            <button type="reset" class='btn btn-warning form-control'> Reset </button>
+        </div>
+    </form>
+
+</main>
+</body>
+{{ end }}
